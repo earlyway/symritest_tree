@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
     <title>나의 타고난 자연의 모습은?</title>
+    <!--tree-->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0", user-scalable=no />
+        <meta property="og:url"           content="https://earlyway.github.io/" />
+    <meta property="og:title"         content="나의 타고난 자연의 모습은?1" />
+    <meta property="og:description"   content="생년월일로 알아보는 나의 타고난 성향 테스트1" />
+    <meta property="og:image"         content="/share/kakao/input.jpg" />
         <!--글씨체-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,12 +18,21 @@
         href="/image/favicon_.png"/>
         <!--css파일 연결-->
         <link rel="stylesheet" type="text/css" href="output.css">
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        <!-- 카카오톡 공유하기-->
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        <script>
+            Kakao.init('5bb339cadb6a8c53105514b7e3df11c2');
+        </script>
     </head>
 
 
     <body>
         
-        <h1 class="main">@@@ 님에 타고난 자연의 모습은?</h1>
+        <h1 class="main">
+		나의 타고난 자연의 모습은?
+
+        </h1>
         <!-- 사진 영역 -->
         <div class="flexbox">
             <img src="../output_main_img/tree.png"><br>
@@ -32,9 +46,8 @@
 나무가 자라날 때 하늘로 솟아오르려고자 하기에<br>
 어떠한 목표가 생기면 강한 추진력을 발휘하여 <br>
 적극적으로 나아가 일을 이룩하고자 노력합니다.<br>
-단체나 모임에서 리더적인 성향이 드러나며<br>
-정이 많은 편입니다.<br>
-다만 주변을 바라보는 힘이 약하여<br>
+단체나 모임에서 리더적인 성향이 드러나며 정이 많은 편입니다.<br>
+다만 주변을 바라보는 힘이 약하여 <br>
 미움을 받을 수 있기에 주의해야 합니다.
             </div>
             <div id="content_mobile">
@@ -43,9 +56,9 @@
 나무가 자라날 때 하늘로 솟아오르려고자 하기에<br>
 어떠한 목표가 생기면 강한 추진력을 발휘하여 <br>
 적극적으로 나아가 일을 이룩하고자 노력합니다.<br>
-단체나 모임에서 리더적인 성향이 드러나며<br>
-정이 많은 편입니다.<br>
-다만 주변을 바라보는 힘이 약하여<br> 
+단체나 모임에서 리더적인 성향이<br>
+드러나며 정이 많은 편입니다.<br>
+다만 주변을 바라보는 힘이 약하여<br>
 미움을 받을 수 있기에 주의해야 합니다.
             </div>
         </div>
@@ -54,13 +67,13 @@
         </div>
         <form id="shareitembox">
             <div class="shareitem">
-                <a href="http://facebook.com" target="_blank"><img src="image/fb.png" alt="fb_connect" id="fb"></a>
-                <a href="http://kakao.com" target="_blank" ><img src="image/kakao.png" alt="kakao_connect" id="kakao"></a>
-                <a href="http://twitter.com" target="_blank"><img src="image/twiter.png" alt="twt_connect" id="twt"></a>
-                <a href="http://www.naver.com" target="_blank"><img src="image/url2.png" alt="url_connect" id="urll"></a>
+                <a href="javascript:sendLink()"id="kakao-link-btn" class="kakao"><img src="image/kakao.png" alt="kakao_connect" id="kakao"></a>
+            <!--<a href="http://twitter.com" target="_blank"><img src="image/twiter.png" alt="twt_connect" id="twt"></a>-->
+            <a href="javascript:copyToClipboard(val)" id="textarea" onclick="copy()" target="_self">
+                <img src="image/url2.png" alt="url_connect" id="urll"></a>
             </div>
         <div class="resultbottom">
-            <button name="restart" type="submit" id="restart" formaction="/index.html">다시하기</button>
+            <button name="restart" type="submit" id="restart" formaction="https://earlyway.github.io/">다시하기</button>
         </div>
         </form>
         <div class="footerpc">
@@ -69,5 +82,60 @@
         <div class="footermobile">
             Copyright Ⓒ Meet eum - Sonㅣ Won seok - An ㅣ<br> Tae gon - Kim . All rights reserved.
         </div>
+        <script>
+            let url = decodeURI(location.search);
+
+            temp = url?.split("?"); 
+            data=temp && temp[1].split("="); 
+            name = data[1];
+            
+            
+            
+            //document.getElementsByClassName("main")[0].innerHTML="2님에 타고난 자연의 모습은?";
+            //const mainstr = name + "님에 타고난";
+            const mainstr="\n님에 타고난 자연의 모습은?";
+            document.getElementsByClassName("main")[0].innerHTML=name + mainstr;
+            //console.log(mainstr);
+            //document.getElementsByClassName("main")[0].innerHTML=mainstr;
+
+
+            function sendLink() {
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '나의 타고난 자연의 모습은?',
+                    description: '나무처럼 순수하고, 외강내유의 당신',
+                    imageUrl: 'https://i.imgur.com/RWF5FHK.jpg',
+                    link: {
+                        mobileWebUrl: 'https://earlyway.github.io/symritest_tree',
+                        webUrl: 'https://earlyway.github.io/symritest_tree'
+                    },
+                },
+                buttons: [
+                    {
+                        title: '테스트 결과보기',
+                        link: {
+                            mobileWebUrl: 'https://earlyway.github.io/symritest_tree',
+                            webUrl: 'https://earlyway.github.io/symritest_tree'
+                        },
+                    },
+                ]
+            });
+        }
+        function copyToClipboard(val) {
+            const t = document.createElement("textarea");
+            document.body.appendChild(t);
+            t.value = val;
+            t.select();
+            document.execCommand('copy');
+            document.body.removeChild(t);
+        }
+        function copy() {
+            copyToClipboard('https://earlyway.github.io/symritest_tree');
+            console.log('Copied!');
+        }
+
+            
+            </script>
 </body>
 </html>
